@@ -1,0 +1,222 @@
+<!--
+  @description       : airline
+-->
+<template>
+ <lightning-card>
+   4
+  <Center><b>Kempegowda International Airport Bengaluru</b></Center>
+  <!--Flight Search End-->
+  <div style="padding-left: 2rem; padding-right: 2rem;" class="slds-p-vertical_small slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+    <lightning-input type="search" label="Search Flights" onchange={handleFLightSearch} value={flightSelected} ></lightning-input>
+    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" data-id = "flightSelected"  style="position:relative" role="combobox">
+        <ul class="slds-dropdown slds-dropdown_fluid" role="listbox">
+            <template if:true={flightsRecord}>
+                <template for:each={flightsRecord} for:item='item'>
+                    <li role="presentation" key={item.Id} data-value={item.Name} data-name={item.Id} onclick={onFlightSelect} class="slds-listbox__item slds-listbox--vertical">
+                        <span class="slds-media slds-listbox__option slds-listbox__option--plain" role="option">
+                            <span class="slds-media__body singleRow">
+                                <div if:true={item.Name}>
+                                    <span class="optionTitle slds-listbox__option-text slds-listbox__option-text_entity" style="white-space: normal">
+                                        {item.Name}
+                                    </span>
+                                </div>
+                            </span>
+                        </span>										
+                    </li>
+                </template>
+            </template>
+        </ul>
+    </div>
+</div>
+<!--Flight Search End-->
+<!-- Flight Details Start-->
+<template if:true={showFlight}>
+<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+    <thead>
+       <tr class="slds-line-height_reset">
+          <th class="" scope="col">
+             <div class="slds-truncate" title="Name">Flight Name</div>
+          </th>
+          <th class="" scope="col">
+             <div class="slds-truncate" title="From ">From</div>
+          </th>
+          <th class="" scope="col">
+             <div class="slds-truncate" title="To">To</div>
+          </th>
+          <th class="" scope="col">
+             <div class="slds-truncate" title="Starting Time">Starting Time</div>
+          </th>
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Reaching Time">Reaching Time</div>
+         </th>
+         <th class="" scope="col">
+            <div class="slds-truncate" title="No Of Passangers Booked">No Of Passangers Booked</div>
+         </th>
+       </tr>
+    </thead>
+    
+    <tbody>   
+       <template for:each={flightDetail} for:item="fly">
+          <tr class="slds-hint-parent" key={fly.Id}>
+             <td>
+                <div class="slds-truncate">{fly.Name}</div>
+             </td>
+             <td>
+                <div class="slds-truncate">{fly.From__c}</div>
+             </td>
+             <td>
+              <div class="slds-truncate">{fly.To__c}</div>
+           </td>
+           <td>
+            <div class="slds-truncate">{fly.Starting_Time__c}</div>
+         </td>
+         <td>
+          <div class="slds-truncate">{fly.Reaching_Time__c}</div>
+       </td>
+       <td>
+         <div class="slds-truncate">{fly.NoOf_Passangers_Booked__c}</div>
+      </td>
+    </tr>
+       </template>
+    </tbody>
+ </table>
+</template>
+<!-- Flight Details End-->
+<!--Crew Member Search Start-->
+<div style="padding-left: 2rem; padding-right: 2rem;" class="slds-p-vertical_small slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+  <lightning-input type="search" label="Search Crew Member" onchange={handleCrewSearch} value={crewSelected} ></lightning-input>
+  <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" data-id = "crewSelected"  style="position:relative" role="combobox">
+      <ul class="slds-dropdown slds-dropdown_fluid" role="listbox">
+          <template if:true={crewRecord}>
+              <template for:each={crewRecord} for:item='item'>
+                  <li role="presentation" key={item.Id} data-value={item.Name} data-name={item.Id} onclick={onCrewSelect} class="slds-listbox__item slds-listbox--vertical">
+                      <span class="slds-media slds-listbox__option slds-listbox__option--plain" role="option">
+                          <span class="slds-media__body singleRow">
+                              <div if:true={item.Name}>
+                                  <span class="optionTitle slds-listbox__option-text slds-listbox__option-text_entity" style="white-space: normal">
+                                      {item.Name}
+                                  </span>
+                              </div>
+                          </span>
+                      </span>										
+                  </li>
+              </template>
+          </template>
+      </ul>
+  </div>
+</div>
+<!--Crew Member Search End-->
+<!-- Crew Details Start-->
+<template if:true={showCrew}>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+        <thead>
+           <tr class="slds-line-height_reset">
+              <th class="" scope="col">
+                 <div class="slds-truncate" title="Crew Name">Crew Name</div>
+              </th>
+              <th class="" scope="col">
+                 <div class="slds-truncate" title="Age">Age</div>
+              </th>
+              <th class="" scope="col">
+                 <div class="slds-truncate" title="Role">Role</div>
+              </th>
+              <th class="" scope="col">
+                 <div class="slds-truncate" title="Flight">Flight</div>
+              </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="No Of Passangers Assigned">No Of Passangers Assigned</div>
+             </th>
+           </tr>
+        </thead>
+        
+        <tbody>   
+           <template for:each={crewDetail} for:item="crew">
+              <tr class="slds-hint-parent" key={crew.Id}>
+                 <td>
+                    <div class="slds-truncate">{crew.Name}</div>
+                 </td>
+                 <td>
+                    <div class="slds-truncate">{crew.Age__c}</div>
+                 </td>
+                 <td>
+                  <div class="slds-truncate">{crew.Role__c}</div>
+               </td>
+               <td>
+                <div class="slds-truncate">{crew.Flight__r.Name}</div>
+             </td>
+             <td>
+              <div class="slds-truncate">{crew.NoOf_Passangers_Assigned__c}</div>
+           </td>
+            </tr>
+           </template>
+        </tbody>
+     </table>
+    </template>
+    <!--Crew Detail End-->
+    <!--Passanger Search Start-->
+    <div style="padding-left: 2rem; padding-right: 2rem;" class="slds-p-vertical_small slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+      <lightning-input type="search" label="Search Passanger" onchange={handlePassangerSearch} value={passangerSelected} ></lightning-input>
+      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" data-id = "passangerSelected"  style="position:relative" role="combobox">
+          <ul class="slds-dropdown slds-dropdown_fluid" role="listbox">
+              <template if:true={passangarRecord}>
+                  <template for:each={passangarRecord} for:item='item'>
+                      <li role="presentation" key={item.Id} data-value={item.Name} data-name={item.Id} onclick={onPassangarSelect} class="slds-listbox__item slds-listbox--vertical">
+                          <span class="slds-media slds-listbox__option slds-listbox__option--plain" role="option">
+                              <span class="slds-media__body singleRow">
+                                  <div if:true={item.Name}>
+                                      <span class="optionTitle slds-listbox__option-text slds-listbox__option-text_entity" style="white-space: normal">
+                                          {item.Name}
+                                      </span>
+                                  </div>
+                              </span>
+                          </span>										
+                      </li>
+                  </template>
+              </template>
+          </ul>
+      </div>
+  </div>
+    <!--Passanger Search End-->
+    <!--Passanger Details Start-->
+    <template if:true={showPassanger}>
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+          <thead>
+             <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                   <div class="slds-truncate" title="Passanger Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                   <div class="slds-truncate" title="Age">Age</div>
+                </th>
+                <th class="" scope="col">
+                   <div class="slds-truncate" title="">Email</div>
+                </th>
+             </tr>
+          </thead>
+          
+          <tbody>   
+             <template for:each={passangerDetail} for:item="pass">
+                <tr class="slds-hint-parent" key={pass.Id}>
+                   <td>
+                      <div class="slds-truncate">{pass.Name}</div>
+                   </td>
+                   <td>
+                      <div class="slds-truncate">{pass.Age__c}</div>
+                   </td>
+                   <td>
+                    <div class="slds-truncate">{pass.Email__c}</div>
+                 </td>
+              </tr>
+             </template>
+          </tbody>
+       </table>
+      </template>
+    <!--Passanger Details End-->
+    <!--Booking start-->
+    </br>
+    <div style="color:grey"><i>Adding this Booknow button to book ticket and run triggers to count no.of passanger assigned/booked on respective objects</i></div>
+    <center><lightning-button variant="brand" label="Book Now" onclick={onBook}></lightning-button>
+    </center>
+    <!--Booking End-->
+ </lightning-card>
+</template>

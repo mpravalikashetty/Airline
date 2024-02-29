@@ -1,0 +1,12 @@
+<!--
+  @description       : newAirline
+-->
+<template>
+    <div class="slds-grid slds-grid_vertical">
+        <lightning-record-edit-form record-id={recordId} object-api-name="loginUser__c" onsuccess ={handleSuccess} onerror={handleError} onsubmit={onSubmitHandler}>
+            <div style="padding-left: 2rem; padding-right: 2rem;" class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12"> 
+                <lightning-input-field name="Flight" class="validate" required  field-name='Flight__c'></lightning-input-field>
+            </div>
+        </lightning-record-edit-form>
+        </div>
+</template>
